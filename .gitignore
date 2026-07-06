@@ -1,0 +1,71 @@
+# ============================
+# Root .gitignore (React + .NET + SQLite)
+# ============================
+
+# ----------------------------
+# OS / Editor junk
+# ----------------------------
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ----------------------------
+# Environment files
+# ----------------------------
+.env
+.env.local
+.env.*.local
+
+# ----------------------------
+# Node / React (web/)
+# ----------------------------
+*/**/node_modules/**/*
+node_modules/*
+*/build/
+*/dist/
+**/dist/*
+*/.parcel-cache/
+*/.next/
+*/.vite/
+*/npm-debug.log*
+*/yarn-debug.log*
+*/yarn-error.log*
+*/.eslintcache
+
+# ----------------------------
+# .NET (api/)
+# ----------------------------
+*/**/bin/*
+*/**/obj/*
+*/**/\.vs/
+*/**/\.user
+*/**/\.suo
+
+# ASP.NET publish output
+api/wwwroot/
+
+# ----------------------------
+# SQLite database
+# ----------------------------
+*api/*.db
+*api/*.db-shm
+*api/*.db-wal
+
+# ----------------------------
+# Logs
+# ----------------------------
+*api/logs/
+*web/logs/
+
+# ----------------------------
+# Azure artifacts (optional)
+# ----------------------------
+*.azureconfig
+*.azurepubxml
+*/package-lock.json
+package-lock.json

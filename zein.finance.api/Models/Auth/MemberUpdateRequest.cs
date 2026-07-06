@@ -1,0 +1,1 @@
+public record MemberUpdateRequest(int Id, string Name, string Role, string Status);
