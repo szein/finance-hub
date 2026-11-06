@@ -10,8 +10,11 @@ using Microsoft.JSInterop.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-IdentityModelEventSource.ShowPII = true;
-IdentityModelEventSource.LogCompleteSecurityArtifact = true; // Enable detailed error messages for authentication/authorization issues (useful for debugging, but disable in production)
+if (builder.Environment.IsDevelopment())
+{
+    IdentityModelEventSource.ShowPII = true;
+    IdentityModelEventSource.LogCompleteSecurityArtifact = true; // Enable detailed error messages for authentication/authorization issues (useful for debugging, but disable in production)
+}
 
 builder.Services.AddOpenApi();
 builder.Services.AddCors();
@@ -59,28 +62,28 @@ builder.Services
     {
         options.TokenHandlers.Clear();
         // This handler is more tolerant of slight encoding variations.
-        options.TokenHandlers.Add(new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler()); 
-        
+        options.TokenHandlers.Add(new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler());
+
         // Tell the middleware NOT to look for an external discovery document
-        options.Authority = null; 
+        options.Authority = null;
         options.MetadataAddress = string.Empty;
-        options.RequireHttpsMetadata = false; 
+        options.RequireHttpsMetadata = false;
 
         var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidIssuer = jwt.Issuer, // Must match the 'iss' claim in jwt.io
-            
+
             ValidateAudience = true,
             ValidAudience = jwt.Audience, // Must match the 'aud' claim in jwt.io
-            
+
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
 
-            LogValidationExceptions = false, 
+            LogValidationExceptions = false,
             ValidTypes = new[] { "JWT" },
-            
+
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero // Removes the 5-minute default buffer
         };
@@ -99,9 +102,15 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-app.UseRouting();
 app.UseHttpsRedirection();
-app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+app.UseRouting();
+
+app.UseCors(policy =>
+    policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
 app.UseAuthentication();
 app.UseAuthorization();
 

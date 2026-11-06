@@ -8,7 +8,7 @@ public class MinimalApi
 {
     public static void Configure(WebApplication app)
     {
-        app.MapGet("/api/health", () => "I am Healthy!");
+        app.MapGet("/api/health", () => "I am Alive!");
         
         app.MapGet("/api/dbhealth", async (FinanceDbContext db)   =>
         {
