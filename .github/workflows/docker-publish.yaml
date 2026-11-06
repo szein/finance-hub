@@ -26,8 +26,8 @@ jobs:
 
       - name: Build image
         run: |
-          docker build \
-          -f zein.finance.api/Dockerfile \
+          cd zein.finance.api \
+          docker build \          
           -t ghcr.io/${{ github.repository_owner }}/financehubapi:latest .
 
       - name: Push image
