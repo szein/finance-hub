@@ -1,5 +1,7 @@
+import { config } from "./../config";
+
 let accessToken: string | null = localStorage.getItem('accessToken');
-const apiBaseUrl = import.meta.env.VITE_FINANCE_API_URL?.trim();
+const apiBaseUrl = config.apiUrl;
 
 async function refreshSession() {
   // For JWT, refresh is not implemented yet, so just return false

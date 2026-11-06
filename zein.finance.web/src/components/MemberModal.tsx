@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Button, Input, Select, SelectItem } from "@heroui/react";
 import { Member, UserState } from '../types';
 
@@ -17,7 +18,7 @@ interface MemberModalProps {
   onOpenChange: (isOpen: boolean) => void;
   editingMember: Member | null;
   memberForm: MemberFormState;
-  setMemberForm: (form: MemberFormState) => void;
+  setMemberForm: Dispatch<SetStateAction<MemberFormState>>;
   handleSaveMember: () => void;
   isSaving: boolean;
 }

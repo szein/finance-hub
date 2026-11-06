@@ -1,14 +1,15 @@
-import React from 'react';
+import type { Dispatch, FormEvent, SetStateAction } from 'react';
 import { DollarSign } from 'lucide-react';
 import { Card, CardHeader, CardBody, Input, Button, Divider } from "@heroui/react";
 import { LoadingOverlay } from './LoadingOverlay';
+import type { AuthForm, AuthMode } from '../hooks/useAuth';
 
 interface AuthProps {
-  authMode: 'login' | 'register';
-  setAuthMode: (mode: 'login' | 'register') => void;
-  authForm: any;
-  setAuthForm: (form: any) => void;
-  handleAuth: (e: React.FormEvent) => void;
+  authMode: AuthMode;
+  setAuthMode: (mode: AuthMode) => void;
+  authForm: AuthForm;
+  setAuthForm: Dispatch<SetStateAction<AuthForm>>;
+  handleAuth: (event: FormEvent<HTMLFormElement>) => void;
   error: string;
   message: string;
   isAuthSubmitting: boolean;
@@ -71,7 +72,7 @@ export function Auth({ authMode, setAuthMode, authForm, setAuthForm, handleAuth,
             </Button>
           </form>
         </CardBody>
-        <Divider className="my-4" />
+        {/* <Divider className="my-4" />
         <div className="text-center pb-4">
           <Button 
             variant="light" 
@@ -81,7 +82,7 @@ export function Auth({ authMode, setAuthMode, authForm, setAuthForm, handleAuth,
           >
             {authMode === 'login' ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
           </Button>
-        </div>
+        </div> */}
 
         <LoadingOverlay
           open={isAuthSubmitting}
