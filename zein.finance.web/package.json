@@ -28,8 +28,12 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
-    "tailwindcss": "^4.1.14",
+    "tailwindcss": "^4.3.5",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "allowScripts": {
+    "@heroui/shared-utils@2.1.12": true,
+    "esbuild@0.25.12": true
   }
 }

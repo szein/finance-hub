@@ -20,3 +20,12 @@ Web runs on `http://localhost:5173` by default.
 ## Environment
 
 - `VITE_FINANCE_API_URL` - target for `/api` proxy in development
+
+
+## Docker
+
+Build docker image
+`docker build -t react-app .`
+
+Run docker container
+`docker run -d -p 8080:80 --name react-container react-app`
